@@ -25,26 +25,16 @@ class Ui_LengthConverter(object):
         LengthConverter.resize(290, 180)
         self.gridLayout = QGridLayout(LengthConverter)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.out_line2 = QLineEdit(LengthConverter)
-        self.out_line2.setObjectName(u"out_line2")
-
-        self.gridLayout.addWidget(self.out_line2, 4, 1, 1, 1)
-
-        self.out_line = QLineEdit(LengthConverter)
-        self.out_line.setObjectName(u"out_line")
-
-        self.gridLayout.addWidget(self.out_line, 4, 0, 1, 1)
-
         self.dd_out_unit = QComboBox(LengthConverter)
         self.dd_out_unit.setObjectName(u"dd_out_unit")
         self.dd_out_unit.setDuplicatesEnabled(False)
 
         self.gridLayout.addWidget(self.dd_out_unit, 3, 0, 1, 2)
 
-        self.dd_in_unit = QComboBox(LengthConverter)
-        self.dd_in_unit.setObjectName(u"dd_in_unit")
+        self.out_line = QLineEdit(LengthConverter)
+        self.out_line.setObjectName(u"out_line")
 
-        self.gridLayout.addWidget(self.dd_in_unit, 1, 0, 1, 2)
+        self.gridLayout.addWidget(self.out_line, 4, 0, 1, 1)
 
         self.in_line2 = QLineEdit(LengthConverter)
         self.in_line2.setObjectName(u"in_line2")
@@ -61,6 +51,16 @@ class Ui_LengthConverter(object):
         self.in_line.setMaxLength(32767)
 
         self.gridLayout.addWidget(self.in_line, 0, 0, 1, 1)
+
+        self.dd_in_unit = QComboBox(LengthConverter)
+        self.dd_in_unit.setObjectName(u"dd_in_unit")
+
+        self.gridLayout.addWidget(self.dd_in_unit, 1, 0, 1, 2)
+
+        self.out_line2 = QLineEdit(LengthConverter)
+        self.out_line2.setObjectName(u"out_line2")
+
+        self.gridLayout.addWidget(self.out_line2, 4, 1, 1, 1)
 
         self.error_line = QLabel(LengthConverter)
         self.error_line.setObjectName(u"error_line")

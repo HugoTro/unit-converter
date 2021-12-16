@@ -1,21 +1,26 @@
 from PySide6 import QtWidgets, QtGui
-from main_ui import Ui_LengthConverter
+#from main_ui import Ui_LengthConverter
+from ui_2t_ui import Ui_LengthConverter
 import math
 
 class conv(QtWidgets.QWidget, Ui_LengthConverter):
-    convu=['Choose a length','Feet & inches', 'Centimeters']
+    convu=['Choose a length','Feet & inches (ft,in)', 'Centimeters (cm)']
+    spds=['Choose a speed', 'Kilometers per hour (km/h)', 'Knots (kts)', 'Meters per second (m/s)', 'Feet per minute (fpm)', 'Mach (M)']
     def __init__(self):
         super(conv, self).__init__()
         self.ui = Ui_LengthConverter()
         self.ui.setupUi(self)
         self.setupUi()
         self.ui.error_line.setVisible(False)
+        self.ui.spds_err_line.setVisible(False)
         self.setupConnections()
         self.setupShortcuts()
         self.show()
     def setupUi(self):
         self.ui.dd_in_unit.addItems(self.convu)
         self.ui.dd_out_unit.addItems(self.convu)
+        self.ui.dd_s_unit.addItems(self.spds)
+        self.ui.dd_a_unit.addItems(self.spds)
     def setupConnections(self):
         self.ui.btn_val.clicked.connect(self.convert)
     def setupShortcuts(self):
@@ -81,6 +86,10 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 self.error3()
         else:
             self.error1()
+    def spds_convert(self):
+        spds_dd1val=str(self.ui.spds_dd_in_unit.currentText())
+        spds_dd2val=str(self.ui.spds_dd_out_unit.currentText())
+        c=self.ui.spds_in_line.text()
 
 app=QtWidgets.QApplication()
 window1=conv()
