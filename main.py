@@ -2,6 +2,7 @@ from PySide6 import QtWidgets, QtGui
 #from main_ui import Ui_LengthConverter
 from ui_2t_ui import Ui_LengthConverter
 import math
+from threading import Timer
 
 class conv(QtWidgets.QWidget, Ui_LengthConverter):
     convu=['Choose a length','Feet & inches (ft,in)', 'Centimeters (cm)']
@@ -11,32 +12,38 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         self.ui = Ui_LengthConverter()
         self.ui.setupUi(self)
         self.setupUi()
-        self.ui.error_line.setVisible(False)
-        self.ui.spds_err_line.setVisible(False)
+        self.err_line_reset()
+        self.spds_err_line_reset()
         self.setupConnections()
         self.setupShortcuts()
         self.show()
     def setupUi(self):
         self.ui.dd_in_unit.addItems(self.convu)
         self.ui.dd_out_unit.addItems(self.convu)
-        self.ui.dd_s_unit.addItems(self.spds)
-        self.ui.dd_a_unit.addItems(self.spds)
+        self.ui.spds_dd_in_unit.addItems(self.spds)
+        self.ui.spds_dd_out_unit.addItems(self.spds)
     def setupConnections(self):
         self.ui.btn_val.clicked.connect(self.convert)
+        self.ui.btn_spds_val.clicked.connect(self.spds_convert)
     def setupShortcuts(self):
         QtGui.QShortcut(QtGui.QKeySequence('Return'), self, self.convert)
     def success(self):
         self.ui.error_line.setText('Success! Some values might be rounded.')
-        self.ui.error_line.setVisible(True)
+        self.setvis()
     def error1(self):
         self.ui.error_line.setText('Something went wrong, please retry.')
-        self.ui.error_line.setVisible(True)
+        self.setvis()
     def error2(self):
         self.ui.error_line.setText('One of your inputs does not contain numbers.')
-        self.ui.error_line.setVisible(True)
+        self.setvis()
     def error3(self):
         self.ui.error_line.setText("You didn't input a number")
-        self.ui.error_line.setVisible(True)
+        self.setvis()
+    def setvis(self):
+        n_timer=Timer(5,self.err_line_reset)
+        n_timer.start()
+    def err_line_reset(self):
+        self.ui.error_line.setText('This line will display status messages.')
     def convert(self):
         dd1val=str(self.ui.dd_in_unit.currentText())
         dd2val=str(self.ui.dd_out_unit.currentText())
@@ -90,6 +97,28 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         spds_dd1val=str(self.ui.spds_dd_in_unit.currentText())
         spds_dd2val=str(self.ui.spds_dd_out_unit.currentText())
         c=self.ui.spds_in_line.text()
+        if spds_dd1val==self.spds[1] and spds_dd2val==self.spds[2]:
+            try:
+                kts=float(c)/1.852
+                kts=round(kts,2)
+                self.ui.spds_out_line.setText(str(kts))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        else:
+            self.ui.spds_err_line.setText('The conversion you wish for is not yet supported. Sorry :/')
+            self.spds_setvis()
+    def spds_success(self):
+        self.ui.spds_err_line.setText('Success! Some values might be rounded.')
+        self.spds_setvis()
+    def spds_err_1(self):
+        self.ui.spds_err_line.setText('Please input a number and retry')
+        self.spds_setvis()
+    def spds_setvis(self):
+        t=Timer(5,self.spds_err_line_reset)
+        t.start()
+    def spds_err_line_reset(self):
+        self.ui.spds_err_line.setText('This line will display status messages.')
 
 app=QtWidgets.QApplication()
 window1=conv()

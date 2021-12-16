@@ -23,8 +23,8 @@ class Ui_LengthConverter(object):
     def setupUi(self, LengthConverter):
         if not LengthConverter.objectName():
             LengthConverter.setObjectName(u"LengthConverter")
-        LengthConverter.resize(297, 224)
-        LengthConverter.setMinimumSize(QSize(297, 0))
+        LengthConverter.resize(365, 224)
+        LengthConverter.setMinimumSize(QSize(365, 0))
         self.gridLayout = QGridLayout(LengthConverter)
         self.gridLayout.setObjectName(u"gridLayout")
         self.tabs = QTabWidget(LengthConverter)
@@ -120,7 +120,7 @@ class Ui_LengthConverter(object):
 
         self.retranslateUi(LengthConverter)
 
-        self.tabs.setCurrentIndex(1)
+        self.tabs.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(LengthConverter)
@@ -137,6 +137,7 @@ class Ui_LengthConverter(object):
         self.error_line.setText("")
         self.tabs.setTabText(self.tabs.indexOf(self.lengths_tab), QCoreApplication.translate("LengthConverter", u"Lengths", None))
         self.btn_spds_val.setText(QCoreApplication.translate("LengthConverter", u"Convert to", None))
+        self.spds_in_line.setPlaceholderText(QCoreApplication.translate("LengthConverter", u"Input a speed here", None))
         self.spds_err_line.setText("")
         self.tabs.setTabText(self.tabs.indexOf(self.speeds_tab), QCoreApplication.translate("LengthConverter", u"Speeds", None))
     # retranslateUi

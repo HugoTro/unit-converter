@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>297</width>
+    <width>365</width>
     <height>224</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>297</width>
+    <width>365</width>
     <height>0</height>
    </size>
   </property>
@@ -23,7 +23,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="lengths_tab">
       <attribute name="title">
@@ -113,7 +113,11 @@
         <widget class="QComboBox" name="spds_dd_in_unit"/>
        </item>
        <item row="0" column="0">
-        <widget class="QLineEdit" name="spds_in_line"/>
+        <widget class="QLineEdit" name="spds_in_line">
+         <property name="placeholderText">
+          <string>Input a speed here</string>
+         </property>
+        </widget>
        </item>
        <item row="4" column="0">
         <widget class="QLineEdit" name="spds_out_line"/>
