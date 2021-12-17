@@ -1,1 +1,3 @@
 uiconverter/converter.py
+__pycache__/
+build/
