@@ -15,15 +15,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QTabWidget,
+from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCheckBox, QComboBox,
+    QGridLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpinBox, QTabWidget, QVBoxLayout,
     QWidget)
 
 class Ui_LengthConverter(object):
     def setupUi(self, LengthConverter):
         if not LengthConverter.objectName():
             LengthConverter.setObjectName(u"LengthConverter")
-        LengthConverter.resize(365, 224)
+        LengthConverter.resize(422, 224)
         LengthConverter.setMinimumSize(QSize(365, 0))
         self.gridLayout = QGridLayout(LengthConverter)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -114,6 +115,60 @@ class Ui_LengthConverter(object):
         self.gridLayout_3.addWidget(self.spds_err_line, 5, 0, 1, 1)
 
         self.tabs.addTab(self.speeds_tab, "")
+        self.weights_tab = QWidget()
+        self.weights_tab.setObjectName(u"weights_tab")
+        self.verticalLayout = QVBoxLayout(self.weights_tab)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.label = QLabel(self.weights_tab)
+        self.label.setObjectName(u"label")
+        font = QFont()
+        font.setPointSize(26)
+        self.label.setFont(font)
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout.addWidget(self.label)
+
+        self.tabs.addTab(self.weights_tab, "")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.verticalLayout_2 = QVBoxLayout(self.tab)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.label_2 = QLabel(self.tab)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setFont(font)
+        self.label_2.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.label_2)
+
+        self.tabs.addTab(self.tab, "")
+        self.settings_tab = QWidget()
+        self.settings_tab.setObjectName(u"settings_tab")
+        self.gridLayout_4 = QGridLayout(self.settings_tab)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.check_rnding = QCheckBox(self.settings_tab)
+        self.check_rnding.setObjectName(u"check_rnding")
+
+        self.gridLayout_4.addWidget(self.check_rnding, 1, 0, 1, 1)
+
+        self.nbr_rnding = QSpinBox(self.settings_tab)
+        self.nbr_rnding.setObjectName(u"nbr_rnding")
+        self.nbr_rnding.setButtonSymbols(QAbstractSpinBox.UpDownArrows)
+        self.nbr_rnding.setMaximum(12)
+
+        self.gridLayout_4.addWidget(self.nbr_rnding, 2, 0, 1, 1)
+
+        self.check_dark_mode = QCheckBox(self.settings_tab)
+        self.check_dark_mode.setObjectName(u"check_dark_mode")
+        self.check_dark_mode.setChecked(True)
+
+        self.gridLayout_4.addWidget(self.check_dark_mode, 0, 0, 1, 1)
+
+        self.label_3 = QLabel(self.settings_tab)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout_4.addWidget(self.label_3, 3, 0, 1, 1)
+
+        self.tabs.addTab(self.settings_tab, "")
 
         self.gridLayout.addWidget(self.tabs, 0, 0, 1, 2)
 
@@ -140,5 +195,13 @@ class Ui_LengthConverter(object):
         self.spds_in_line.setPlaceholderText(QCoreApplication.translate("LengthConverter", u"Input a speed here", None))
         self.spds_err_line.setText("")
         self.tabs.setTabText(self.tabs.indexOf(self.speeds_tab), QCoreApplication.translate("LengthConverter", u"Speeds", None))
+        self.label.setText(QCoreApplication.translate("LengthConverter", u"INOP", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.weights_tab), QCoreApplication.translate("LengthConverter", u"Weights", None))
+        self.label_2.setText(QCoreApplication.translate("LengthConverter", u"INOP", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.tab), QCoreApplication.translate("LengthConverter", u"Temperatures", None))
+        self.check_rnding.setText(QCoreApplication.translate("LengthConverter", u"Round numbers (numbers after the decimal)", None))
+        self.check_dark_mode.setText(QCoreApplication.translate("LengthConverter", u"Dark Mode (Recommended)", None))
+        self.label_3.setText("")
+        self.tabs.setTabText(self.tabs.indexOf(self.settings_tab), QCoreApplication.translate("LengthConverter", u"Settings", None))
     # retranslateUi
 

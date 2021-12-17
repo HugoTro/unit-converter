@@ -1,7 +1,7 @@
 from PySide6 import QtWidgets, QtGui
-#from main_ui import Ui_LengthConverter
 from ui_2t_ui import Ui_LengthConverter
 import math
+import qdarktheme
 from threading import Timer
 
 class conv(QtWidgets.QWidget, Ui_LengthConverter):
@@ -16,6 +16,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         self.spds_err_line_reset()
         self.setupConnections()
         self.setupShortcuts()
+        self.setStyleSheet(qdarktheme.load_stylesheet('dark'))
         self.show()
     def setupUi(self):
         self.ui.dd_in_unit.addItems(self.convu)
@@ -25,13 +26,25 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
     def setupConnections(self):
         self.ui.btn_val.clicked.connect(self.convert)
         self.ui.btn_spds_val.clicked.connect(self.spds_convert)
+        self.ui.check_dark_mode.stateChanged.connect(self.lgt_drk_mode)
     def setupShortcuts(self):
         QtGui.QShortcut(QtGui.QKeySequence('Return'), self, self.s_conv)
     def s_conv(self):
         self.convert()
         self.spds_convert()
+    def lgt_drk_mode(self):
+        if self.ui.check_dark_mode.isChecked():
+            self.setStyleSheet(qdarktheme.load_stylesheet('dark'))
+        else:
+            self.setStyleSheet(qdarktheme.load_stylesheet('light'))
+    def set_rounding(self):
+        if self.ui.check_rnding.isChecked():
+            u=int(self.nbr_rnding.value())
+            return u
+        else:
+            return 999
     def success(self):
-        self.ui.error_line.setText('Success! Some values might be rounded.')
+        self.ui.error_line.setText(f'Success! Values are rounded to {self.set_rounding()} digits after the decimal.')
         self.setvis()
     def error1(self):
         self.ui.error_line.setText('Something went wrong, please retry.')
@@ -40,7 +53,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         self.ui.error_line.setText('One of your inputs does not contain numbers.')
         self.setvis()
     def error3(self):
-        self.ui.error_line.setText("You didn't input a number")
+        self.ui.error_line.setText("You didn't input a number.")
         self.setvis()
     def setvis(self):
         n_timer=Timer(5,self.err_line_reset)
@@ -57,7 +70,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 cm1=float(a)*30.48
                 cm2=float(b)*2.54
                 cms=cm1+cm2
-                cms=round(cms,2)
+                cms=round(cms,self.set_rounding())
                 self.ui.out_line.setText(str(cms))
                 self.success()
             except:
@@ -67,7 +80,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 inc=float(a)/2.54
                 feet=math.floor(inc/12)
                 inches=inc-12*feet
-                inches=round(inches,2)
+                inches=round(inches,self.set_rounding())
                 self.ui.out_line.setText(str(feet))
                 self.ui.out_line2.setText(str(inches))
                 self.success()
@@ -82,7 +95,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 inc=cms/2.54
                 feet=math.floor(inc/12)
                 inches=inc-12*feet
-                inches=round(inches,2)
+                inches=round(inches,self.set_rounding())
                 self.ui.out_line.setText(str(feet))
                 self.ui.out_line2.setText(str(inches))
                 self.success()
@@ -100,10 +113,12 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         spds_dd1val=str(self.ui.spds_dd_in_unit.currentText())
         spds_dd2val=str(self.ui.spds_dd_out_unit.currentText())
         c=self.ui.spds_in_line.text()
-        if spds_dd1val==self.spds[1] and spds_dd2val==self.spds[2]:
+        if spds_dd1val==spds_dd2val:
+            self.ui.spds_err_line.setText("I don't think converting units into the same unit is useful :)")
+        elif spds_dd1val==self.spds[1] and spds_dd2val==self.spds[2]:
             try:
                 kts=float(c)/1.852
-                #kts=round(kts,2)
+                kts=round(kts,self.set_rounding())
                 self.ui.spds_out_line.setText(str(kts))
                 self.spds_success()
             except:
@@ -111,7 +126,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[2] and spds_dd2val==self.spds[1]:
             try:
                 kmph=float(c)*1.852
-                #Kkmph=round(kmph,2)
+                kmph=round(kmph,self.set_rounding())
                 self.ui.spds_out_line.setText(str(kmph))
                 self.spds_success()
             except:
@@ -120,6 +135,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
             try:
                 kmph=float(c)*1.852
                 ms=kmph/3.6
+                ms=round(ms,self.set_rounding())
                 self.ui.spds_out_line.setText(str(ms))
                 self.spds_success()
             except:
@@ -128,6 +144,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
             try:
                 kmph=float(c)*3.6
                 kts=kmph/1.852
+                kts=round(kts,self.set_rounding())
                 self.ui.spds_out_line.setText(str(kts))
                 self.spds_success()
             except:
@@ -135,6 +152,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[2] and spds_dd2val==self.spds[4]:
             try:
                 fpm=float(c)*6076.1155/60
+                fpm=round(fpm,self.set_rounding())
                 self.ui.spds_out_line.setText(str(fpm))
                 self.spds_success()
             except:
@@ -142,6 +160,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[4] and spds_dd2val==self.spds[2]:
             try:
                 kts=float(c)*60/6076.1155
+                kts=round(kts,self.set_rounding())
                 self.ui.spds_out_line.setText(str(kts))
                 self.spds_success()
             except:
@@ -149,6 +168,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[2] and spds_dd2val==self.spds[5]:
             try:
                 mach=float(c)*1.852/3.6/343
+                mach=round(mach,self.set_rounding())
                 self.ui.spds_out_line.setText(str(mach))
                 self.spds_success()
             except:
@@ -156,6 +176,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[5] and spds_dd2val==self.spds[2]:
             try:
                 mach=float(c)*343*3.6/1.852
+                mach=round(mach,self.set_rounding())
                 self.ui.spds_out_line.setText(str(mach))
                 self.spds_success()
             except:
@@ -163,6 +184,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[3] and spds_dd2val==self.spds[5]:
             try:
                 mach=float(c)/343
+                mach=round(mach,self.set_rounding())
                 self.ui.spds_out_line.setText(str(mach))
                 self.spds_success()
             except:
@@ -170,6 +192,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[5] and spds_dd2val==self.spds[3]:
             try:
                 ms=float(c)*343
+                ms=round(ms,self.set_rounding())
                 self.ui.spds_out_line.setText(str(ms))
                 self.spds_success()
             except:
@@ -177,6 +200,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[1] and spds_dd2val==self.spds[3]:
             try:
                 ms=float(c)/3.6
+                ms=round(ms,self.set_rounding())
                 self.ui.spds_out_line.setText(str(ms))
                 self.spds_success()
             except:
@@ -184,6 +208,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[3] and spds_dd2val==self.spds[1]:
             try:
                 kmph=float(c)*3.6
+                kmph=round(kmph,self.set_rounding())
                 self.ui.spds_out_line.setText(str(kmph))
                 self.spds_success()
             except:
@@ -191,6 +216,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[1] and spds_dd2val==self.spds[5]:
             try:
                 mach=float(c)/3.6/343
+                mach=round(mach,self.set_rounding())
                 self.ui.spds_out_line.setText(str(mach))
                 self.spds_success()
             except:
@@ -198,6 +224,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[5] and spds_dd2val==self.spds[1]:
             try:
                 mach=float(c)*343*3.6
+                mach=round(mach,self.set_rounding())
                 self.ui.spds_out_line.setText(str(mach))
                 self.spds_success()
             except:
@@ -205,6 +232,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[3] and spds_dd2val==self.spds[4]:
             try:
                 fpm=float(c)*3.28084*60
+                fpm=round(fpm,self.set_rounding())
                 self.ui.spds_out_line.setText(str(fpm))
                 self.spds_success()
             except:
@@ -212,6 +240,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         elif spds_dd1val==self.spds[4] and spds_dd2val==self.spds[3]:
             try:
                 ms=float(c)/60/3.28084
+                ms=round(ms,self.set_rounding())
                 self.ui.spds_out_line.setText(str(ms))
                 self.spds_success()
             except:
@@ -220,7 +249,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
             self.ui.spds_err_line.setText('The conversion you wish for is not yet supported. Sorry :/')
             self.spds_setvis()
     def spds_success(self):
-        self.ui.spds_err_line.setText('Success! Some values might be rounded.')
+        self.ui.spds_err_line.setText(f'Success! Values are rounded to {self.set_rounding()} digits after the decimal.')
         self.spds_setvis()
     def spds_err_1(self):
         self.ui.spds_err_line.setText('Please input a number and retry')
