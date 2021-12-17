@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['C:/Users/ptrou/Documents/Github/unit-converter/main.py'],
+a = Analysis(['main.py'],
              pathex=[],
              binaries=[],
              datas=[],
