@@ -15,10 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCheckBox, QComboBox,
-    QGridLayout, QLabel, QLineEdit, QPushButton,
-    QSizePolicy, QSpinBox, QTabWidget, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGridLayout,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QSpinBox, QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_LengthConverter(object):
     def setupUi(self, LengthConverter):
@@ -147,13 +146,15 @@ class Ui_LengthConverter(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.check_rnding = QCheckBox(self.settings_tab)
         self.check_rnding.setObjectName(u"check_rnding")
+        self.check_rnding.setCheckable(True)
+        self.check_rnding.setChecked(True)
 
         self.gridLayout_4.addWidget(self.check_rnding, 1, 0, 1, 1)
 
         self.nbr_rnding = QSpinBox(self.settings_tab)
         self.nbr_rnding.setObjectName(u"nbr_rnding")
-        self.nbr_rnding.setButtonSymbols(QAbstractSpinBox.UpDownArrows)
         self.nbr_rnding.setMaximum(12)
+        self.nbr_rnding.setValue(9)
 
         self.gridLayout_4.addWidget(self.nbr_rnding, 2, 0, 1, 1)
 

@@ -246,6 +246,38 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 self.spds_success()
             except:
                 self.spds_err_1()
+        elif spds_dd1val==self.spds[1] and spds_dd2val==self.spds[4]:
+            try:
+                fpm=float(c)*3280.84/60
+                fpm=round(fpm,self.set_rounding())
+                self.ui.spds_out_line.setText(str(fpm))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[4] and spds_dd2val==self.spds[1]:
+            try:
+                kmph=float(c)*60/3280.84
+                kmph=round(kmph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(kmph))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[4] and spds_dd2val==self.spds[5]:
+            try:
+                mach=float(c)/60/3.28084/343
+                mach=round(mach,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mach))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[5] and spds_dd2val==self.spds[4]:
+            try:
+                fpm=float(c)*343*3.28084*60
+                fpm=round(fpm,self.set_rounding())
+                self.ui.spds_out_line.setText(str(fpm))
+                self.spds_success()
+            except:
+                self.spds_err_1()
         else:
             self.ui.spds_err_line.setText('The conversion you wish for is not yet supported. Sorry :/')
             self.spds_setvis()
