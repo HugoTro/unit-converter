@@ -39,7 +39,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
             self.setStyleSheet(qdarktheme.load_stylesheet('light'))
     def set_rounding(self):
         if self.ui.check_rnding.isChecked():
-            u=int(self.nbr_rnding.value())
+            u=int(self.ui.nbr_rnding.value())
             return u
         else:
             return 999
@@ -115,6 +115,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         c=self.ui.spds_in_line.text()
         if spds_dd1val==spds_dd2val:
             self.ui.spds_err_line.setText("I don't think converting units into the same unit is useful :)")
+            self.spds_setvis()
         elif spds_dd1val==self.spds[1] and spds_dd2val==self.spds[2]:
             try:
                 kts=float(c)/1.852
