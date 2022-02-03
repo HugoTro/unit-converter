@@ -6,7 +6,7 @@ from threading import Timer
 
 class conv(QtWidgets.QWidget, Ui_LengthConverter):
     convu=['Choose a length unit','Feet & inches (ft,in)', 'Centimeters (cm)']
-    spds=['Choose a speed unit', 'Kilometers per hour (km/h)', 'Knots (kts)', 'Meters per second (m/s)', 'Feet per minute (fpm)', 'Mach (M)']
+    spds=['Choose a speed unit', 'Kilometers per hour (km/h)', 'Knots (kts)', 'Meters per second (m/s)', 'Feet per minute (fpm)', 'Mach (M)', 'Miles per hour (mph)']
     def __init__(self):
         super(conv, self).__init__()
         self.ui = Ui_LengthConverter()
@@ -275,6 +275,87 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 fpm=float(c)*343*3.28084*60
                 fpm=round(fpm,self.set_rounding())
                 self.ui.spds_out_line.setText(str(fpm))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[1] and spds_dd2val==self.spds[6]:
+            try:
+                mph=float(c)*0.6213711922
+                mph=round(mph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mph))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[6] and spds_dd2val==self.spds[1]:
+            try:
+                kmph=float(c)*1.609344
+                kmph=round(kmph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(kmph))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[6] and spds_dd2val==self.spds[5]:
+            try:
+                mach=float(c)*0.001303
+                mach=round(mach,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mach))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[5] and spds_dd2val==self.spds[6]:
+            try:
+                mph=float(c)*767.269148
+                mph=round(mph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mph))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[3] and spds_dd2val==self.spds[6]:
+            try:
+                mph=float(c)*0.00062137119225*3600
+                mph=round(mph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mph))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[6] and spds_dd2val==self.spds[3]:
+            try:
+                ms=float(c)/3600/0.00062137119225
+                ms=round(ms,self.set_rounding())
+                self.ui.spds_out_line.setText(str(ms))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        
+        elif spds_dd1val==self.spds[2] and spds_dd2val==self.spds[6]:
+            try:
+                mph=float(c)*1.1507794480236
+                mph=round(mph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mph))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[6] and spds_dd2val==self.spds[2]:
+            try:
+                kts=float(c)*0.8689762419007
+                kts=round(kts,self.set_rounding())
+                self.ui.spds_out_line.setText(str(kts))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[4] and spds_dd2val==self.spds[6]:
+            try:
+                mph=float(c)/5280*60
+                mph=round(mph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mph))
+                self.spds_success()
+            except:
+                self.spds_err_1()
+        elif spds_dd1val==self.spds[6] and spds_dd2val==self.spds[4]:
+            try:
+                mph=float(c)*5280/60
+                mph=round(mph,self.set_rounding())
+                self.ui.spds_out_line.setText(str(mph))
                 self.spds_success()
             except:
                 self.spds_err_1()

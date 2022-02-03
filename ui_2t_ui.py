@@ -144,6 +144,13 @@ class Ui_LengthConverter(object):
         self.settings_tab.setObjectName(u"settings_tab")
         self.gridLayout_4 = QGridLayout(self.settings_tab)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.label_4 = QLabel(self.settings_tab)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setMaximumSize(QSize(16777215, 22))
+        self.label_4.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.gridLayout_4.addWidget(self.label_4, 3, 0, 1, 1)
+
         self.check_rnding = QCheckBox(self.settings_tab)
         self.check_rnding.setObjectName(u"check_rnding")
         self.check_rnding.setCheckable(True)
@@ -151,12 +158,10 @@ class Ui_LengthConverter(object):
 
         self.gridLayout_4.addWidget(self.check_rnding, 1, 0, 1, 1)
 
-        self.nbr_rnding = QSpinBox(self.settings_tab)
-        self.nbr_rnding.setObjectName(u"nbr_rnding")
-        self.nbr_rnding.setMaximum(12)
-        self.nbr_rnding.setValue(9)
+        self.label_3 = QLabel(self.settings_tab)
+        self.label_3.setObjectName(u"label_3")
 
-        self.gridLayout_4.addWidget(self.nbr_rnding, 2, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.label_3, 4, 0, 1, 1)
 
         self.check_dark_mode = QCheckBox(self.settings_tab)
         self.check_dark_mode.setObjectName(u"check_dark_mode")
@@ -164,10 +169,12 @@ class Ui_LengthConverter(object):
 
         self.gridLayout_4.addWidget(self.check_dark_mode, 0, 0, 1, 1)
 
-        self.label_3 = QLabel(self.settings_tab)
-        self.label_3.setObjectName(u"label_3")
+        self.nbr_rnding = QSpinBox(self.settings_tab)
+        self.nbr_rnding.setObjectName(u"nbr_rnding")
+        self.nbr_rnding.setMaximum(12)
+        self.nbr_rnding.setValue(9)
 
-        self.gridLayout_4.addWidget(self.label_3, 3, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.nbr_rnding, 2, 0, 1, 1)
 
         self.tabs.addTab(self.settings_tab, "")
 
@@ -200,9 +207,10 @@ class Ui_LengthConverter(object):
         self.tabs.setTabText(self.tabs.indexOf(self.weights_tab), QCoreApplication.translate("LengthConverter", u"Weights", None))
         self.label_2.setText(QCoreApplication.translate("LengthConverter", u"INOP", None))
         self.tabs.setTabText(self.tabs.indexOf(self.tab), QCoreApplication.translate("LengthConverter", u"Temperatures", None))
+        self.label_4.setText(QCoreApplication.translate("LengthConverter", u"Convert: Enter", None))
         self.check_rnding.setText(QCoreApplication.translate("LengthConverter", u"Round numbers (numbers after the decimal)", None))
-        self.check_dark_mode.setText(QCoreApplication.translate("LengthConverter", u"Dark Mode (Recommended)", None))
         self.label_3.setText("")
+        self.check_dark_mode.setText(QCoreApplication.translate("LengthConverter", u"Dark Mode (Recommended)", None))
         self.tabs.setTabText(self.tabs.indexOf(self.settings_tab), QCoreApplication.translate("LengthConverter", u"Settings", None))
     # retranslateUi
 
