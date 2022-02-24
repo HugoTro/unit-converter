@@ -164,10 +164,10 @@ class Ui_LengthConverter(object):
 
         self.verticalLayout_2.addWidget(self.temps_dd_out_unit)
 
-        self.lineEdit_2 = QLineEdit(self.tab)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.temps_out_line = QLineEdit(self.tab)
+        self.temps_out_line.setObjectName(u"temps_out_line")
 
-        self.verticalLayout_2.addWidget(self.lineEdit_2)
+        self.verticalLayout_2.addWidget(self.temps_out_line)
 
         self.temps_err_line = QLabel(self.tab)
         self.temps_err_line.setObjectName(u"temps_err_line")
@@ -219,7 +219,7 @@ class Ui_LengthConverter(object):
 
         self.retranslateUi(LengthConverter)
 
-        self.tabs.setCurrentIndex(4)
+        self.tabs.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(LengthConverter)

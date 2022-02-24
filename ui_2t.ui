@@ -23,7 +23,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="lengths_tab">
       <attribute name="title">
@@ -210,7 +210,7 @@
         <widget class="QComboBox" name="temps_dd_out_unit"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="temps_out_line"/>
        </item>
        <item>
         <widget class="QLabel" name="temps_err_line">

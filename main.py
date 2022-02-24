@@ -29,12 +29,14 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
     def setupConnections(self):
         self.ui.btn_val.clicked.connect(self.convert)
         self.ui.btn_spds_val.clicked.connect(self.spds_convert)
+        self.ui.btn_temps_val.clicked.connect(self.temps_convert)
         self.ui.check_dark_mode.stateChanged.connect(self.lgt_drk_mode)
     def setupShortcuts(self):
         QtGui.QShortcut(QtGui.QKeySequence('Return'), self, self.s_conv)
     def s_conv(self):
         self.convert()
         self.spds_convert()
+        self.temps_convert()
     def lgt_drk_mode(self):
         if self.ui.check_dark_mode.isChecked():
             self.setStyleSheet(qdarktheme.load_stylesheet('dark'))
@@ -379,7 +381,69 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
     def temps_convert(self):
         temps_dd1val=str(self.ui.temps_dd_in_unit.currentText())
         temps_dd2val=str(self.ui.temps_dd_out_unit.currentText())
-        d=self.ui.spds_in_line.text()
+        d=self.ui.temps_in_line.text()
+        if temps_dd1val==self.temps[1] and temps_dd2val==self.temps[2]:
+            try:
+                fahrenheit=float(d)*(9/5)+32
+                fahrenheit=round(fahrenheit,self.set_rounding())
+                self.ui.temps_out_line.setText(str(fahrenheit))
+                self.temps_success()
+            except:
+                self.temps_err_1()
+        elif temps_dd1val==self.temps[2] and temps_dd2val==self.temps[1]:
+            try:
+                celsius=(float(d)-32)*(5/9)
+                celsius=round(celsius,self.set_rounding())
+                self.ui.temps_out_line.setText(str(celsius))
+                self.temps_success()
+            except:
+                self.temps_err_1()
+        elif temps_dd1val==self.temps[1] and temps_dd2val==self.temps[3]:
+            try:
+                kelvin=float(d)+273.15
+                kelvin=round(kelvin,self.set_rounding())
+                self.ui.temps_out_line.setText(str(kelvin))
+                self.temps_success()
+            except:
+                self.temps_err_1()
+        elif temps_dd1val==self.temps[3] and temps_dd2val==self.temps[1]:
+            try:
+                celsius=float(d)-273.15
+                celsius=round(celsius,self.set_rounding())
+                self.ui.temps_out_line.setText(str(celsius))
+                self.temps_success()
+            except:
+                self.temps_err_1()
+        elif temps_dd1val==self.temps[2] and temps_dd2val==self.temps[3]:
+            try:
+                kelvin=(float(d)-32)*(5/9)+273.15
+                kelvin=round(kelvin,self.set_rounding())
+                self.ui.temps_out_line.setText(str(kelvin))
+                self.temps_success()
+            except:
+                self.temps_err_1()
+        elif temps_dd1val==self.temps[3] and temps_dd2val==self.temps[2]:
+            try:
+                fahrenheit=(float(d)-273.15)*(9/5)+32
+                fahrenheit=round(fahrenheit,self.set_rounding())
+                self.ui.temps_out_line.setText(str(fahrenheit))
+                self.temps_success()
+            except:
+                self.temps_err_1()
+        else:
+            self.ui.temps_err_line.setText('The conversion you wish for is not yet supported. Sorry :/')
+            self.temps_setvis()
+    def temps_success(self):
+        self.ui.temps_err_line.setText(f'Success! Values are rounded to {self.set_rounding()} digits after the decimal.')
+        self.temps_setvis()
+    def temps_err_1(self):
+        self.ui.temps_err_line.setText('Please input a number and retry')
+        self.temps_setvis()
+    def temps_setvis(self):
+        t=Timer(5,self.temps_err_line_reset)
+        t.start()
+    def temps_err_line_reset(self):
+        self.ui.temps_err_line.setText('This line will display status messages.')
 
 app=QtWidgets.QApplication()
 window1=conv()
