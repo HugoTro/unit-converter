@@ -5,8 +5,9 @@ import qdarktheme
 from threading import Timer
 
 class conv(QtWidgets.QWidget, Ui_LengthConverter):
-    convu=['Choose a length unit','Feet & inches (ft,in)', 'Centimeters (cm)']
+    lengths=['Choose a length unit','Feet & inches (ft,in)', 'Centimeters (cm)']
     spds=['Choose a speed unit', 'Kilometers per hour (km/h)', 'Knots (kts)', 'Meters per second (m/s)', 'Feet per minute (fpm)', 'Mach (M)', 'Miles per hour (mph)']
+    temps=['Choose a temperature unit', 'Celsius (°C)', 'Fahrenheit (°F)', 'Kelvin (K)']
     def __init__(self):
         super(conv, self).__init__()
         self.ui = Ui_LengthConverter()
@@ -19,10 +20,12 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         self.setStyleSheet(qdarktheme.load_stylesheet('dark'))
         self.show()
     def setupUi(self):
-        self.ui.dd_in_unit.addItems(self.convu)
-        self.ui.dd_out_unit.addItems(self.convu)
+        self.ui.dd_in_unit.addItems(self.lengths)
+        self.ui.dd_out_unit.addItems(self.lengths)
         self.ui.spds_dd_in_unit.addItems(self.spds)
         self.ui.spds_dd_out_unit.addItems(self.spds)
+        self.ui.temps_dd_in_unit.addItems(self.temps)
+        self.ui.temps_dd_out_unit.addItems(self.temps)
     def setupConnections(self):
         self.ui.btn_val.clicked.connect(self.convert)
         self.ui.btn_spds_val.clicked.connect(self.spds_convert)
@@ -65,7 +68,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         dd2val=str(self.ui.dd_out_unit.currentText())
         a=self.ui.in_line.text()
         b=self.ui.in_line2.text()
-        if dd1val==self.convu[1] and dd2val==self.convu[2]:
+        if dd1val==self.lengths[1] and dd2val==self.lengths[2]:
             try:
                 cm1=float(a)*30.48
                 cm2=float(b)*2.54
@@ -75,7 +78,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 self.success()
             except:
                 self.error2()
-        elif dd1val==self.convu[2] and dd2val==self.convu[1]:
+        elif dd1val==self.lengths[2] and dd2val==self.lengths[1]:
             try:
                 inc=float(a)/2.54
                 feet=math.floor(inc/12)
@@ -86,7 +89,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 self.success()
             except:
                 self.error3()
-        elif dd1val==self.convu[1] and dd2val==self.convu[1]:
+        elif dd1val==self.lengths[1] and dd2val==self.lengths[1]:
             try:
                 cm1=float(a)*30.48
                 cm2=float(b)*2.54
@@ -101,7 +104,7 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
                 self.success()
             except:
                 self.error2()
-        elif dd1val==self.convu[2] and dd2val==self.convu[2]:
+        elif dd1val==self.lengths[2] and dd2val==self.lengths[2]:
             try:
                 self.ui.out_line.setText(a)
                 self.success()
@@ -373,6 +376,10 @@ class conv(QtWidgets.QWidget, Ui_LengthConverter):
         t.start()
     def spds_err_line_reset(self):
         self.ui.spds_err_line.setText('This line will display status messages.')
+    def temps_convert(self):
+        temps_dd1val=str(self.ui.temps_dd_in_unit.currentText())
+        temps_dd2val=str(self.ui.temps_dd_out_unit.currentText())
+        d=self.ui.spds_in_line.text()
 
 app=QtWidgets.QApplication()
 window1=conv()

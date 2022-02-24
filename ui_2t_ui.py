@@ -23,7 +23,7 @@ class Ui_LengthConverter(object):
     def setupUi(self, LengthConverter):
         if not LengthConverter.objectName():
             LengthConverter.setObjectName(u"LengthConverter")
-        LengthConverter.resize(422, 224)
+        LengthConverter.resize(501, 278)
         LengthConverter.setMinimumSize(QSize(365, 0))
         self.gridLayout = QGridLayout(LengthConverter)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -128,16 +128,52 @@ class Ui_LengthConverter(object):
         self.verticalLayout.addWidget(self.label)
 
         self.tabs.addTab(self.weights_tab, "")
+        self.forces_tab = QWidget()
+        self.forces_tab.setObjectName(u"forces_tab")
+        self.gridLayout_5 = QGridLayout(self.forces_tab)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.label_6 = QLabel(self.forces_tab)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setFont(font)
+        self.label_6.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.label_6, 0, 0, 1, 1)
+
+        self.tabs.addTab(self.forces_tab, "")
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.verticalLayout_2 = QVBoxLayout(self.tab)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.label_2 = QLabel(self.tab)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setFont(font)
-        self.label_2.setAlignment(Qt.AlignCenter)
+        self.temps_in_line = QLineEdit(self.tab)
+        self.temps_in_line.setObjectName(u"temps_in_line")
 
-        self.verticalLayout_2.addWidget(self.label_2)
+        self.verticalLayout_2.addWidget(self.temps_in_line)
+
+        self.temps_dd_in_unit = QComboBox(self.tab)
+        self.temps_dd_in_unit.setObjectName(u"temps_dd_in_unit")
+
+        self.verticalLayout_2.addWidget(self.temps_dd_in_unit)
+
+        self.btn_temps_val = QPushButton(self.tab)
+        self.btn_temps_val.setObjectName(u"btn_temps_val")
+
+        self.verticalLayout_2.addWidget(self.btn_temps_val)
+
+        self.temps_dd_out_unit = QComboBox(self.tab)
+        self.temps_dd_out_unit.setObjectName(u"temps_dd_out_unit")
+
+        self.verticalLayout_2.addWidget(self.temps_dd_out_unit)
+
+        self.lineEdit_2 = QLineEdit(self.tab)
+        self.lineEdit_2.setObjectName(u"lineEdit_2")
+
+        self.verticalLayout_2.addWidget(self.lineEdit_2)
+
+        self.temps_err_line = QLabel(self.tab)
+        self.temps_err_line.setObjectName(u"temps_err_line")
+        self.temps_err_line.setMaximumSize(QSize(16777215, 17))
+
+        self.verticalLayout_2.addWidget(self.temps_err_line)
 
         self.tabs.addTab(self.tab, "")
         self.settings_tab = QWidget()
@@ -183,7 +219,7 @@ class Ui_LengthConverter(object):
 
         self.retranslateUi(LengthConverter)
 
-        self.tabs.setCurrentIndex(0)
+        self.tabs.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(LengthConverter)
@@ -205,7 +241,11 @@ class Ui_LengthConverter(object):
         self.tabs.setTabText(self.tabs.indexOf(self.speeds_tab), QCoreApplication.translate("LengthConverter", u"Speeds", None))
         self.label.setText(QCoreApplication.translate("LengthConverter", u"INOP", None))
         self.tabs.setTabText(self.tabs.indexOf(self.weights_tab), QCoreApplication.translate("LengthConverter", u"Weights", None))
-        self.label_2.setText(QCoreApplication.translate("LengthConverter", u"INOP", None))
+        self.label_6.setText(QCoreApplication.translate("LengthConverter", u"INOP", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.forces_tab), QCoreApplication.translate("LengthConverter", u"Forces", None))
+        self.temps_in_line.setPlaceholderText(QCoreApplication.translate("LengthConverter", u"Input a temperature here", None))
+        self.btn_temps_val.setText(QCoreApplication.translate("LengthConverter", u"Convert to", None))
+        self.temps_err_line.setText("")
         self.tabs.setTabText(self.tabs.indexOf(self.tab), QCoreApplication.translate("LengthConverter", u"Temperatures", None))
         self.label_4.setText(QCoreApplication.translate("LengthConverter", u"Convert: Enter", None))
         self.check_rnding.setText(QCoreApplication.translate("LengthConverter", u"Round numbers (numbers after the decimal)", None))
